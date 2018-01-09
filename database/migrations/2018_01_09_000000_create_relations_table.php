@@ -15,8 +15,8 @@ class CreateRelationsTable extends Migration
     {
         Schema::create('relations', function (Blueprint $table) {
             $table->increments("id");
-            $table->integer("user_id")->unique()->unsigned();
-            $table->integer("friend_id")->unique()->unsigned();
+            $table->integer("user_id")->unsigned();
+            $table->integer("friend_id")->unsigned();
             $table->integer("relation_type");
             $table->foreign("user_id")->references('id')->on('users');
             $table->foreign("friend_id")->references('id')->on('users');

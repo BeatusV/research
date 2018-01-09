@@ -3,11 +3,11 @@
 @section('content')
     <form  method="POST" action="{{ route('searchPost') }}">
         {{ csrf_field() }}
-        <input type="text" name="searchValue">
-        <input type="submit" value="search">
+        <input type="text" name="searchValue"/>
+        <input type="submit" value="search"/>
     </form>
 
-    @if(!$results->isEmpty())
+    @if(!empty($results))
         <table>
             <thead>
                 <th>Name</th>
@@ -16,7 +16,15 @@
             @foreach($results as $result)
                 <tr>
                     <td>{{$result->name}}</td>
-                    <td></td>
+                    <td>
+                        @if(is_null($result->friend_id))
+                        <form method="POST" action="{{ route('addFriend') }}">{{csrf_field()}}
+                            <input type="hidden" name="friend" value="{{$result->original_id}}"/>
+                            <input type="submit" value="add Friend"/>
+                        </form></td>
+                        @else
+                            Is a friend
+                        @endif
                 </tr>
             @endforeach
         </table>
