@@ -22,3 +22,4 @@ Route::get('/search', 'SearchController@index')->name('search')->middleware('aut
 
 Route::post('/search', 'SearchController@search')->name('searchPost')->middleware('auth');
 Route::post('/search/addFriend', 'SearchController@createFriendship')->name('addFriend')->middleware('auth');
+Route::post('/profile/{id}', 'ProfileController@index')->name('profile')->middleware('auth');

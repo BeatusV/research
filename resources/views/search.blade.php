@@ -15,7 +15,7 @@
             </thead>
             @foreach($results as $result)
                 <tr>
-                    <td>{{$result->name}}</td>
+                    <td><a href="{{route("profile", ['id' => $result->id])}}">{{$result->name}}</a></td>
                     <td>
                         @if(is_null($result->friend_id))
                         <form method="POST" action="{{ route('addFriend') }}">{{csrf_field()}}
