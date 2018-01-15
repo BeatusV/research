@@ -17,9 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/search', 'SearchController@index')->name('search')->middleware('auth');
 
 Route::post('/search', 'SearchController@search')->name('searchPost')->middleware('auth');
 Route::post('/search/addFriend', 'SearchController@createFriendship')->name('addFriend')->middleware('auth');
-Route::post('/profile/{id}', 'ProfileController@index')->name('profile')->middleware('auth');
+Route::get('/profile/{id}', 'ProfileController@index')->name('profile')->middleware('auth');

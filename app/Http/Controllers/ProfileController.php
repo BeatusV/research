@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\ProfilePicture;
+use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     /**
@@ -24,8 +25,8 @@ class ProfileController extends Controller
      */
     public function index(Request $request)
     {
-        $profileId = $request->friend_id;
-        $profile = DB::table('users')->where('id', '=', $profileId);
-        return view('profile', ['profile' => $profile]);
+       $profilePicture = ProfilePicture::where('user_id', Auth::id())->first();
+
+       return view('profile', ['picture' => $profilePicture]);
     }
 }
