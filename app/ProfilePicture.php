@@ -12,4 +12,5 @@ use Illuminate\Database\Eloquent\Model;
 class ProfilePicture extends Model
 {
     protected $table = 'profile_pictures';
+    public $timestamps = false;
 }

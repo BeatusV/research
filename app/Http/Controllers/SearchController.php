@@ -21,6 +21,18 @@ class SearchController
         return view('search', ['results' => []]);
     }
 
+    public function discover(){
+        $friends = DB::table('users')
+            ->leftJoin('relations',  function($join) {
+                $join->on('users.id', '=', 'relations.user_id');
+            })
+            ->join('relations_types', 'relations.relation_type', '=', 'relations_types.id')
+            ->select('users.id')
+            ->where([['relations.friend_id', '=' ,Auth::user()->id],
+                ['users.id', '!=', Auth::user()->id]])
+            ->get();
+        return $friends;
+    }
     public function search(Request $request)
     {
         $searchValue = $request->searchValue;
@@ -36,7 +48,7 @@ class SearchController
 //            ->orWhereNull('relations.friend_id')
 
             ->get();
-        
+
         return view('search', ['results' => $results]);
     }
 

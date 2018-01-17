@@ -10,10 +10,10 @@
 
         </div>
         <div class="col-md-push-1 col-md-9">
-            <h3>{{Auth::user()->name}}</h3>
+            <h3>{{$user->name}}</h3>
             <ul>
-                <li>{{Auth::user()->place_of_birth}}</li>
-                <li>{{Auth::user()->date_of_birth}}</li>
+                <li>{{$user->place_of_birth}}</li>
+                <li>{{$user->date_of_birth}}</li>
             </ul>
         </div>
 

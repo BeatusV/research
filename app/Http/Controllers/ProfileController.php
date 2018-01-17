@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\ProfilePicture;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 class ProfileController extends Controller
 {
     /**
@@ -25,8 +26,9 @@ class ProfileController extends Controller
      */
     public function index(Request $request)
     {
-       $profilePicture = ProfilePicture::where('user_id', Auth::id())->first();
 
-       return view('profile', ['picture' => $profilePicture]);
+       $profilePicture = ProfilePicture::where('user_id', $request->id)->first();
+       $user = User::where('id', $request->id)->first();
+       return view('profile', ['picture' => $profilePicture, 'user' => $user]);
     }
 }
