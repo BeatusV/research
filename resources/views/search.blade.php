@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container">
+        <div class="row">
+            <h3>Enter your friends name or part of it (empty search gives all names)</h3>
     <form  method="POST" action="{{ route('searchPost') }}">
         {{ csrf_field() }}
         <input type="text" name="searchValue"/>
@@ -29,4 +32,6 @@
             @endforeach
         </table>
     @endif
+        </div>
+    </div>
 @endsection

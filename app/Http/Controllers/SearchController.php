@@ -32,7 +32,7 @@ class SearchController
             ->where([['relations.friend_id', '=' ,Auth::user()->id],
                 ['users.id', '!=', Auth::user()->id],
                 ['name', 'LIKE', '%'.$searchValue.'%'] ] )
-            ->orWhereNull('relations.friend_id')
+//            ->orWhereNull('relations.friend_id')
 
             ->get();
 
