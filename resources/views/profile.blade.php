@@ -3,13 +3,13 @@
 @section('content')
     <div class="container">
     <div class="row">
-        <div class="col-md-2">
-            <div>
+        <div class="col-md-5">
+            <div class="profile-picture">
                 <img src="{{$picture->url}}"/>
             </div>
 
         </div>
-        <div class="col-md-push-1 col-md-9">
+        <div class="col-md-7">
             <h3>{{$user->name}}</h3>
             <ul>
                 <li>{{$user->place_of_birth}}</li>
