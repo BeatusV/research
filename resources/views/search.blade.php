@@ -26,7 +26,7 @@
                             <input type="submit" value="add Friend"/>
                         </form></td>
                         @else
-                            Is a friend
+                           is a {{$result->relation_type}}
                         @endif
                 </tr>
             @endforeach

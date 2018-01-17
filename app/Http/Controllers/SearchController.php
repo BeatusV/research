@@ -28,14 +28,15 @@ class SearchController
             ->leftJoin('relations',  function($join) {
                     $join->on('users.id', '=', 'relations.user_id');
                     })
-            ->select('users.id as original_id', 'users.name', 'relations.*')
+            ->join('relations_types', 'relations.relation_type', '=', 'relations_types.id')
+            ->select('users.id as original_id', 'users.name', 'relations.*', 'relations_types.name as relation_type')
             ->where([['relations.friend_id', '=' ,Auth::user()->id],
                 ['users.id', '!=', Auth::user()->id],
-                ['name', 'LIKE', '%'.$searchValue.'%'] ] )
+                ['users.name', 'LIKE', '%'.$searchValue.'%'] ] )
 //            ->orWhereNull('relations.friend_id')
 
             ->get();
-
+        
         return view('search', ['results' => $results]);
     }
 
