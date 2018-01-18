@@ -22,16 +22,21 @@ class SearchController
     }
 
     public function discover(){
-        $friends = DB::table('users')
-            ->leftJoin('relations',  function($join) {
-                $join->on('users.id', '=', 'relations.user_id');
-            })
-            ->join('relations_types', 'relations.relation_type', '=', 'relations_types.id')
-            ->select('users.id')
-            ->where([['relations.friend_id', '=' ,Auth::user()->id],
-                ['users.id', '!=', Auth::user()->id]])
-            ->get();
-        return $friends;
+        $friends = DB::table('relations as rel1')
+                    ->join('relations as rel2', 'rel1.user_id', '=', 'rel2.friend_id')
+                    ->join('relations as rel3', 'rel2.user_id', '=', 'rel3.friend_id')
+                    ->select('rel3.user_id')
+                    ->where('rel1.user_id', Auth::user()->id)
+                    ->where('rel3.user_id', '!=', Auth::user()->id)
+                    ->groupBy('rel3.user_id')
+                    ->get();
+        $objects = [];
+        for($i =0; $i <20; $i++){
+            $user = DB::table('users')->select('*')->where('id', $friends[$i]->user_id)->first();
+            array_push($objects, $user);
+        }
+//        return $objects;
+        return view('discover', ['users' => $objects]);
     }
     public function search(Request $request)
     {
